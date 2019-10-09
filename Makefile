@@ -63,7 +63,6 @@ $(EXEC): $(OBJS)
 
 # target: header files dependecny
 .c.o: *.c $(HDRS)
-	@echo =============== $@  $< $(INCL_PATH)
 	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $<  -o $@
 
 .PHONY: clean 
