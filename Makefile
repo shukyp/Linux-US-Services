@@ -1,3 +1,25 @@
+#
+# How depedency rule components are referred
+#
+# all: a.cpp b.cpp
+# $@ mean to all
+# $< a.cpp
+# $^ a.cpp b.cpp
+#
+# ------------------------
+#
+# debug make file 
+# make --debug[=flags]
+#	no flags is like using -d
+#	b basic debugging
+# 	v verbose basic debugging
+#	i show implicit rules
+#	j detailed debug info
+#	m show info while remaking makefile
+#
+# see: https://linux.die.net/man/1/make
+#
+#
 
 # Variable
 
@@ -10,30 +32,44 @@ else
 	DBG=
 endif
 
-OBJ_FILES = main.o file1.o file2.o
-HDR_FILES = file1.h file2.h
+CC_FLAG := -v -Wall $(DBG) -c
+CC_TOOL := gcc
 
-CMPLR_FLAG = -v -c -Wall $(DBG)
-CC_TOOL = gcc 
+MAIN_HDRDIR := 	./incl/
+SS_HDRDIR := 	./incl2/
+INCL_PATH := 	-I$(MAIN_HDRDIR) -I$(SS_HDRDIR)
 
-EXECUTABLE = exec
+EXEC_DIR := 	./obj
+
+#LIBS :=
+#LPATH :=
+
+MAIN_SRCDIR := 	.
+SS_SRCDIR := 	./task
+
+HDRS := 	$(wildcard $(MAIN_HDRDIR)/*.h $(SS_HDRDIR)/*.h)
+SRCS := 	$(wildcard $(MAIN_SRCDIR)/*.c $(SS_SRCDIR)/*.c)
+OBJS := 	$(SRCS:.c=.o)
+
+EXEC := 	$(EXEC_DIR)/exec
+
+.PHONY: all 
 
 # main target
-all: $(EXECUTABLE)
+all: $(EXEC)
 
-$(EXECUTABLE): $(OBJ_FILES) $(HDR_FILES)
-	$(CC_TOOL) -o $(EXECUTABLE) $(OBJ_FILES)
+$(EXEC): $(OBJS) 
+	$(CC_TOOL) $(OBJS) -o $(EXEC)
 
 # target: header files dependecny
-*.o: *.c $(HDR_FILES)
-	$(CC_TOOL) $(CMPLR_FLAG) *.c
+.c.o: *.c $(HDRS)
+	@echo =============== $@  $< $(INCL_PATH)
+	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $<  -o $@
 
-.PHONY: clean cleanobj 
-
+.PHONY: clean 
 clean:
-	rm *.o
+	rm $(OBJS)
+	rm $(EXEC)
 
-cleanall:
-	rm *.o
-	rm $(EXECUTABLE)
+
 
