@@ -8,8 +8,9 @@ studying and practicing Linux user-space programming.
 This code can be used and distributed freely for any matter is may help.
 No warranty is set for users of this code.
 
-If you find any mistake or have an idea how to improve the code please
-send an email to: shukyp@bezeqint.net (appreciated!).
+If you find any mistake or have an idea about how to improve the code 
+please do not hesitate to comment (email to: shukyp@bezeqint.net) 
+Any comment will be appreciated!
 
 Enjoy!!!
 
