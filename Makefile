@@ -2,7 +2,7 @@
 # How depedency rule components are referred
 #
 # all: a.cpp b.cpp
-# $@ mean to all
+# $@ mean to 'all' (the target)
 # $< a.cpp
 # $^ a.cpp b.cpp
 #
