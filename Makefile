@@ -39,7 +39,7 @@ MAIN_HDRDIR := 	./incl/
 SS_HDRDIR := 	./incl2/
 INCL_PATH := 	-I$(MAIN_HDRDIR) -I$(SS_HDRDIR)
 
-EXEC_DIR := 	./obj
+EXEC_DIR := 	obj
 
 #LIBS :=
 #LPATH :=
@@ -51,7 +51,7 @@ HDRS := 	$(wildcard $(MAIN_HDRDIR)/*.h $(SS_HDRDIR)/*.h)
 SRCS := 	$(wildcard $(MAIN_SRCDIR)/*.c $(SS_SRCDIR)/*.c)
 OBJS := 	$(SRCS:.c=.o)
 
-EXEC := 	$(EXEC_DIR)/exec
+EXEC := 	./$(EXEC_DIR)/exec
 
 .PHONY: all 
 
