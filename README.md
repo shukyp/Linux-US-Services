@@ -19,10 +19,6 @@ Oct. 10, 2019
 
 IMPORTANT
 ------------
-1. After pulling the software to your local machine
-please create a folder named 'obj' below the root
-folder of the project
-
-2. To create the object files and the executable file
-you can run make (at roo folder). The executable file will reside
-in the 'obj' folder.
+To create the object files and the executable file
+you can run 'make' (while at root folder). 
+The executable file will reside in the 'obj' folder.

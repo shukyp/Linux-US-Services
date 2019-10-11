@@ -56,7 +56,10 @@ EXEC := 	./$(EXEC_DIR)/exec
 .PHONY: all 
 
 # main target
-all: $(EXEC)
+all: $(EXEC_DIR) $(EXEC)
+
+$(EXEC_DIR):
+	@if [ ! -d ./$(EXEC_DIR) ]; then mkdir ./$(EXEC_DIR); fi;
 
 $(EXEC): $(OBJS) 
 	$(CC_TOOL) $(OBJS) -o $(EXEC)
