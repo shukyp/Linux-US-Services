@@ -1,25 +1,30 @@
 # Linux-User-Space
 
-Hi.
-
+# Purpose
 This repository holds code that was developed by Shuky Persky for the purpose of 
 studying and practicing Linux user-space programming.
 
+# Usage / Sharing
 This code can be used and distributed freely for any matter is may help.
 No warranty is set for users of this code.
 
-If you find any mistake or have an idea about how to improve the code 
-please do not hesitate to comment (email to: shukyp@bezeqint.net) 
-Any comment will be appreciated!
+# NO Warranty
+The code inhere is allowed to be used "as is". No warranty may be assumed.
+Using the code is on the sole responsibility of the user.
 
+# addition/Correction/Improvment
+If any mistake/error is encountered, or any idea comes up , the author welcomes 
+(with appreciation) any cmment that will support improving the code.
+
+Same is true if there will be an uncovered topic which should appear as part 
+of the package.
+
+# Contact point
+Please email to: shukyp@bezeqint.net
+
+# Last (but not least)
 Enjoy!!!
 
-Oct. 11, 2019
+October. 11, 2019
 
-===========================================================
 
-IMPORTANT
-------------
-To create the object files and the executable file
-you can run 'make' (while at root folder). 
-The executable file will reside in the 'obj' folder.
