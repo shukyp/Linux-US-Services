@@ -24,12 +24,13 @@
 # Variable
 
 # true | false
-dbg_info=false 
+dbginfo = true
 
-ifeq ($(dbg_info),true)
+#DBG = ggdb
+ifeq ($(dbginfo),true)
 	DBG=-ggdb
 else
-	DBG=
+	DBG= 
 endif
 
 CC_FLAG := -v -Wall $(DBG) -c
@@ -61,12 +62,12 @@ all: $(EXEC_DIR) $(EXEC)
 $(EXEC_DIR):
 	@if [ ! -d ./$(EXEC_DIR) ]; then mkdir ./$(EXEC_DIR); fi;
 
-$(EXEC): $(OBJS) 
+$(EXEC): $(OBJS) Makefile
 	$(CC_TOOL) $(OBJS) -o $(EXEC)
 
 # target: header files dependecny
-.c.o: *.c $(HDRS)
-	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $<  -o $@
+.c.o: *.c $(HDRS) Makefile
+	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $< -o $@
 
 .PHONY: clean 
 clean:
