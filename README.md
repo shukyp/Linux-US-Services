@@ -1,8 +1,8 @@
-# Linux-User-Space
+# Linux-US-OS-Services
 
 ## Purpose
 This repository holds code that was developed by Shuky Persky for the purpose of 
-studying and practicing Linux user-space programming.
+studying and practicing Linux User-Space services given by the Linux Kernel.
 
 ## Usage / Sharing
 This code can be used and distributed freely for any matter is may help.

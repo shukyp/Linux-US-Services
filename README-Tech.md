@@ -1,4 +1,6 @@
-# Linux-User-Space / Tech Info
+# Linux-US-OS-Services / Tech Info
+
+Linux-US-OS-Services stands for Linux User-Space services offered by the Linux kernel.
 
 The code is sperated to modules, each covers a different topic.
 
