@@ -158,7 +158,7 @@ static void show_us_modules (void)
 	printf ("\n Modules Table");
 	
 	// print modules list
-	for (UINT i=0; i<num_of_modules; i++)
+	for (UINT i=1; i<=num_of_modules; i++)
 	{
 		mdl_topics = get_us_module_topics(i);
 		printf ("\n [%d] - %s", i, mdl_topics);

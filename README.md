@@ -1,4 +1,4 @@
-# Linux-US-OS-Services
+# Linux-US-Services
 
 ## Purpose
 This repository holds code that was developed by Shuky Persky for the purpose of 

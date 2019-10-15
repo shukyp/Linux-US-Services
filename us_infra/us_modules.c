@@ -45,9 +45,9 @@ typedef struct us_mdl_info
 // local objects 
 static US_MDL_INFO const us_mdls[] = 
 	{
-		{"Processes Creation, Managment, Destroy", 	(int (*)(void))NULL}, 
-		{"Inter Process Communication", 			(int (*)(void))NULL}, 
-		{"Inter Thread Communication", 				(int (*)(void))NULL}
+		{"Processes Mam=nagement (Create, Manage, Destroy)", 	(int (*)(void))NULL}, 
+		{"Inter Process Communication", 								(int (*)(void))NULL}, 
+		{"Inter Thread Communication", 								(int (*)(void))NULL}
 	};
 
 static UINT num_of_modules = (sizeof(us_mdls)/sizeof(US_MDL_INFO));	

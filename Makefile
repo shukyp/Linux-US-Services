@@ -26,7 +26,6 @@
 # true | false
 dbginfo = true
 
-#DBG = ggdb
 ifeq ($(dbginfo),true)
 	DBG=-ggdb
 else
@@ -36,20 +35,20 @@ endif
 CC_FLAG := -v -Wall $(DBG) -c
 CC_TOOL := gcc
 
-MAIN_HDRDIR := 	./incl/
-SS_HDRDIR := 	./incl2/
-INCL_PATH := 	-I$(MAIN_HDRDIR) -I$(SS_HDRDIR)
+MAIN_INCL  := 	./incl/
+INFRA_INCL := 	./us_infra/
+INCL_PATH  := 	-I$(MAIN_INCL) -I$(INFRA_INCL)
 
 EXEC_DIR := 	obj
 
 #LIBS :=
 #LPATH :=
 
-MAIN_SRCDIR := 	.
-SS_SRCDIR := 	./task
+MAIN_SRC  := 	.
+INFRA_SRC := 	./us_infra
 
-HDRS := 	$(wildcard $(MAIN_HDRDIR)/*.h $(SS_HDRDIR)/*.h)
-SRCS := 	$(wildcard $(MAIN_SRCDIR)/*.c $(SS_SRCDIR)/*.c)
+HDRS := 	$(wildcard $(MAIN_INCL)/*.h $(INFRA_INCL)/*.h)
+SRCS := 	$(wildcard $(MAIN_SRC)/*.c $(INFRA_SRC)/*.c)
 OBJS := 	$(SRCS:.c=.o)
 
 EXEC := 	./$(EXEC_DIR)/exec
