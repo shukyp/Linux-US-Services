@@ -1,8 +1,8 @@
-#include "file2.h"
-#include "file4.h"
+#include "us_types.h"
 
-int func4()
+
+int prcs_manage_main(void)
 {
-	printf("func4(x)\n");
+	printf("\n\n prcs_manage_main is running\n\n");
 	return 0;
 }

@@ -35,21 +35,22 @@ endif
 CC_FLAG := -v -Wall $(DBG) -c
 CC_TOOL := gcc
 
-MAIN_INCL  := 	./incl/
-INFRA_INCL := 	./us_infra/
-INCL_PATH  := 	-I$(MAIN_INCL) -I$(INFRA_INCL)
+INFRA     := ./us_infra/
+PRCS_MNG  := ./prcs_mng/
 
-EXEC_DIR := 	obj
+EXEC_DIR  := ./obj
+
+MAIN_INCL  := ./incl/
+INCL_PATH  := -I$(MAIN_INCL) -I$(INFRA) -I$(PRCS_MNG)
+
+MAIN_SRC      := .
+
+HDRS := 	$(wildcard $(MAIN_INCL)/*.h $(INFRA)/*.h $(PRCS_MNG)/*.h)
+SRCS := 	$(wildcard $(MAIN_SRC)/*.c $(INFRA)/*.c $(PRCS_MNG)/*.c)
+OBJS := 	$(SRCS:.c=.o)
 
 #LIBS :=
 #LPATH :=
-
-MAIN_SRC  := 	.
-INFRA_SRC := 	./us_infra
-
-HDRS := 	$(wildcard $(MAIN_INCL)/*.h $(INFRA_INCL)/*.h)
-SRCS := 	$(wildcard $(MAIN_SRC)/*.c $(INFRA_SRC)/*.c)
-OBJS := 	$(SRCS:.c=.o)
 
 EXEC := 	./$(EXEC_DIR)/exec
 

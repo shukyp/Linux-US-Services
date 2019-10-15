@@ -19,7 +19,7 @@ calling exec -l will amke exec report the supported modules along with module na
 Calling exec -m #ID will make exec call the intended module.
 
 
-# Deployment
+## Deployment
 
 The repository can be forked or cloned according to the
 interest of the one who has interest in the code.
@@ -27,6 +27,6 @@ interest of the one who has interest in the code.
 Please refer to README and LICENSE files.
 
 
-# Available modules
+## Available modules
 
-1. (Empty for now)
+1. Process Management (Create, Manage, Destroy)
