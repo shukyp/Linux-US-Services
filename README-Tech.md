@@ -6,8 +6,8 @@ The code is sperated to modules, each covers a different topic.
 
 Each module holds its own read me file and resides in a dedicated path.
 
-Assume modules name is xxxxx (e.g. processes_management) then:
-1. each module's entry point is at a function called entry_xxxx()
+Assume modules name is xxxxx (e.g. prcs_mng) then:
+1. each module's entry point is at a function called xxxxx_main()
 2. each module provides a header file whose name is xxxxx.h
 
 The executable object named 'exe' resides at obj/ folder (creaded by the make file).
@@ -17,6 +17,17 @@ Calling the exec -h will tell about the supported CLI options.
 One of the supported CLI options is: -m # (where # is the numer of the module).
 calling exec -l will amke exec report the supported modules along with module name and its ID.
 Calling exec -m #ID will make exec call the intended module.
+
+
+## Makefile(s)
+
+The makefile is heirarcical. Each module is built using its own makefile.
+
+Root makefile calls each module's makefile.
+
+Please note that when a single header file is changed, all c files will be recompiled.
+The author decidec not to use teh GNI make capability to build depenedency lists for each c file
+(using the gcc cpability to report #included files).
 
 
 ## Deployment

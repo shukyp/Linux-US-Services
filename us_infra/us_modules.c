@@ -6,7 +6,7 @@
  * The term 'us' stands for 'user space'
  *  
  * Header file(s):
- * 	(1) us_modules.h
+ * 	- us_modules.h
  *
  * 
  * 
@@ -25,6 +25,8 @@
  * -----------------------------------------------------------------------------------*/
 
 // includes
+#include <stdio.h>
+
 #include "us_modules.h"
 
 #include "prcs_mng.h"
@@ -39,16 +41,16 @@
 typedef struct us_mdl_info
 {
 	char* descr;
-	int (*entry_func)(void);
+	int (*entry_func)(bool);
 } US_MDL_INFO; 
 
 
 // local objects 
 static US_MDL_INFO const us_mdls[] = 
 	{
-		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(void))prcs_manage_main}, 
-		{"Inter Process Communication", 						(int (*)(void))NULL}, 
-		{"Inter Thread Communication", 						(int (*)(void))NULL}
+		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(bool))prcs_manage_main}, 
+		{"Inter Process Communication", 						(int (*)(bool))NULL}, 
+		{"Inter Thread Communication", 						(int (*)(bool))NULL}
 	};
 
 static UINT num_of_modules = (sizeof(us_mdls)/sizeof(US_MDL_INFO));	
@@ -94,8 +96,51 @@ const char* const get_us_module_topics(UINT us_mdl_num)
 	// invalid module number
 	return (NULL); 
  }
+
+
+/*------------------------------------------------------------
+function: 
+	displays the right call to this program 
+	
+description:	
+	prints a message which indicates how to call this program with 
+	reference to the various CLI options 
+	
+	if the reason for calling this function is due to the
+	user's request for help then the functions aborts the program.
+
+input:
+	should_abort - should the function abort the program
+
+returns: 
+	None
+  ------------------------------------------------------------*/
+void show_us_modules (void)
+{
+	UINT num_of_modules;
+	const char* mdl_topics;
+	 
+	// get nm of modules
+	num_of_modules = get_num_of_us_modules();
+	
+	// print table title
+	printf ("\n Modules Table");
+	
+	// print modules list
+	for (UINT i=1; i<=num_of_modules; i++)
+	{
+		mdl_topics = get_us_module_topics(i);
+		printf ("\n [%d] - %s", i, mdl_topics);
+	}
+	
+	// print table title
+	printf ("\n\n");
+	
+	// unconditionally abort
+	exit (0);
+}
  
-  
+ 
 /*------------------------------------------------------------
 function: 
 	returns specifc us_module description if input module number
@@ -103,18 +148,19 @@ function:
 	
 input:	
 	us_mdl_num - module number
+	verbose 	  - is verbose mode enabled
 	
 returns: 
-	int - return code
+	int - return code 
   ------------------------------------------------------------*/
-int call_module (UINT us_mdl_num)
+int call_module (UINT us_mdl_num, bool verbose)
 {
 	int rc;
 	
 	// if valid module number
 	if (us_mdl_num <= num_of_modules)
 	{
-	    rc = (*us_mdls[us_mdl_num-1].entry_func)();
+	    rc = (*us_mdls[us_mdl_num-1].entry_func)(verbose);
 	    return (rc);
 	}
 

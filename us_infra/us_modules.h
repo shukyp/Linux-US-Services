@@ -7,7 +7,7 @@
  * 
  * Evolution table:
  * 
- * Version	Date			Action
+ * Version	Date				Action
  * ---------------------------------------------------------------------------------
  * 		1	Oct. 15, 2019	Created
  * 
@@ -28,13 +28,17 @@
 
 // types
 
-
+ 
 // prototypes
-UINT get_num_of_us_modules(void);
+UINT get_num_of_us_modules(void); 
 
 const char* const get_us_module_topics(UINT us_mdl_num);
 
-int call_module (UINT us_mdl_num);
+int call_module (UINT us_mdl_num, bool verbose);
+
+void show_us_modules (void);
+
+
 
 
 #endif // __US_MODULES_H__

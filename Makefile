@@ -35,39 +35,40 @@ endif
 CC_FLAG := -v -Wall $(DBG) -c
 CC_TOOL := gcc
 
-INFRA     := ./us_infra/
-PRCS_MNG  := ./prcs_mng/
+ROOT_PATH      := .
+INFRA_PATH     := ./us_infra
+PRCS_MNG_PATH  := ./prcs_mng
+EXEC_PATH  		:= ./obj
 
-EXEC_DIR  := ./obj
+ROOT_INCL_PATH  := ./incl
+INCL_PATH  := -I$(ROOT_INCL_PATH) -I$(INFRA_PATH) -I$(PRCS_MNG_PATH)
 
-MAIN_INCL  := ./incl/
-INCL_PATH  := -I$(MAIN_INCL) -I$(INFRA) -I$(PRCS_MNG)
-
-MAIN_SRC      := .
-
-HDRS := 	$(wildcard $(MAIN_INCL)/*.h $(INFRA)/*.h $(PRCS_MNG)/*.h)
-SRCS := 	$(wildcard $(MAIN_SRC)/*.c $(INFRA)/*.c $(PRCS_MNG)/*.c)
+HDRS := 	$(wildcard $(ROOT_INCL_PATH)/*.h $(INFRA_PATH)/*.h $(PRCS_MNG_PATH)/*.h)
+SRCS := 	$(wildcard $(ROOT_PATH)/*.c $(INFRA_PATH)/*.c $(PRCS_MNG_PATH)/*.c)
 OBJS := 	$(SRCS:.c=.o)
 
 #LIBS :=
 #LPATH :=
 
-EXEC := 	./$(EXEC_DIR)/exec
+EXEC := 	$(EXEC_PATH)/exec
 
 .PHONY: all 
 
 # main target
-all: $(EXEC_DIR) $(EXEC)
+all: $(EXEC_PATH) $(EXEC)
 
-$(EXEC_DIR):
-	@if [ ! -d ./$(EXEC_DIR) ]; then mkdir ./$(EXEC_DIR); fi;
+$(EXEC_PATH):
+	@if [ ! -d ./$(EXEC_PATH) ]; then mkdir ./$(EXEC_PATH); fi;
 
 $(EXEC): $(OBJS) Makefile
 	$(CC_TOOL) $(OBJS) -o $(EXEC)
 
 # target: header files dependecny
-.c.o: *.c $(HDRS) Makefile
+#.c.o: $(HDRS) Makefile
+%.o: %.c $(HDRS) Makefile 
 	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $< -o $@
+
+#.SUFFIXES: .c .o
 
 .PHONY: clean 
 clean:

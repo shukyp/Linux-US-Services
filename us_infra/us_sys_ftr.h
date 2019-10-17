@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------
- * us_cli.h
+ * us_sys_ftr.h
  * 
- * Header file that exports services of us_cli.c
+ * Header file that exports services of us_sys_ftr.c
  * 
  *  
  * 
@@ -18,23 +18,19 @@
  *** Author: Shuky Persky
  *
  * -----------------------------------------------------------------------------------*/
+ 
+#ifndef __US_SYS_FTR_H__
 
-#ifndef __US_CLI_H__
-
-#define __US_CLI_H__
+#define __US_SYS_FTR_H__
 
 // includes
 #include "us_types.h"
 
 // types
-typedef struct cli_args
-{
-	bool 	verbose;
-	UINT	mdl_num;
-} CLI_ARGS;
 
 // prototypes
-int cli_parse (int argc, char** argv, CLI_ARGS* cli_args);
+void show_us_sys_features(void);
 
 
-#endif // __US_CLI_H__
+
+#endif // __US_SYS_FTR_H__

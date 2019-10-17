@@ -21,11 +21,11 @@
  *** Author: Shuky Persky
  *
  * -----------------------------------------------------------------------------------*/
-
+ 
 // includes
 #include <stdio.h>
 #include <getopt.h>
-
+ 
 #include "us_types.h"
 
 #include "us_cli.h"
@@ -43,10 +43,8 @@ extern int optopt;  	// if unknown option encountered, getopt() places it in opt
 
 // defines
 
-
 // types
  
-
 // local objects 
 static const char* const cli_options = "hvlm:"; // h:help, v:verbose, m:module+num
 static const char* program_name;
@@ -95,26 +93,28 @@ int main (int argc, char* argv[])
 	exit_code = cli_parse (argc, argv, &cli_args);
 	if (exit_code != EXIT_SUCCESS)
 	{
-		printf ("\n\n An error took place while parsing the CLI options, Quit\n\n");
+		printf ("\n\n An error took place while parsing the CLI options (try -h for help), Quit\n\n");
 		exit(-EXIT_FAILURE);
 	}
 
-	/* Done with options. OPTIND points to first nonoption argument.
-	For demonstration purposes, print them if the verbose option was specified. */
-	if (cli_args.verbose) 
-	{
-		for (int i=1; i<argc; ++i)
-			printf ("Argument# %d: %s\n", i, argv[i]);
-	}
-	
 	// if a module number provided - call it
-	if ((cli_args.mdl_num > 0) && (cli_args.mdl_num <= get_num_of_us_modules()))
+	if (cli_args.mdl_num > 0)
 	{
-		rc = call_module(cli_args.mdl_num);
-		exit (rc);
-	}
+		if (cli_args.mdl_num <= get_num_of_us_modules())
+		{
+			// invoke the requested module
+			rc = call_module(cli_args.mdl_num, cli_args.verbose);
+			exit (rc);
+		}
+		else
+		{
+			// clean up 
+			printf("\n\n Invalid module number (try -l option for help), Quit ...\n\n");
+			exit (EXIT_SUCCESS);
+		}
+	}		
 
-	// clean up 
-	printf("\n\n CLI Module number (-m #) must be provided. Try calling with -h (Usage advise), Quit ...\n\n");
+	// Quit 
 	exit (EXIT_SUCCESS);
-}	
+}
+
