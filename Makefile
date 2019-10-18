@@ -21,59 +21,63 @@
 #
 #
 
-# Variable
+# Config Variables
 
 # true | false
 dbginfo = true
 
 ifeq ($(dbginfo),true)
-	DBG=-ggdb
+	DBG			:=-ggdb
 else
-	DBG= 
+	DBG			:=
 endif
 
-CC_FLAG := -v -Wall $(DBG) -c
-CC_TOOL := gcc
+CC_FLAG 			:= -v -Wall $(DBG) -c
+CC_TOOL 			:= gcc
 
-ROOT_PATH      := .
-INFRA_PATH     := ./us_infra
-PRCS_MNG_PATH  := ./prcs_mng
+#US_INFRA (root) module
+US_INFRA			:= us_infra
+US_INFRA_PATH	:= ./$(US_INFRA)
+US_INFRA_LIB	:= $(US_INFRA_PATH)/$(US_INFRA).a
+
+#PRCS_MNG module
+PRCS_MNG			:= prcs_mng
+PRCS_MNG_PATH	:= ./$(PRCS_MNG)
+PRCS_MNG_LIB	:= $(PRCS_MNG_PATH)/$(PRCS_MNG).a
+
+MDL_LIBS			:= $(US_INFRA_LIB) $(PRCS_MNG_LIB)
+
+MAIN_INCL		:= ./incl
+
 EXEC_PATH  		:= ./obj
-
-ROOT_INCL_PATH  := ./incl
-INCL_PATH  := -I$(ROOT_INCL_PATH) -I$(INFRA_PATH) -I$(PRCS_MNG_PATH)
-
-HDRS := 	$(wildcard $(ROOT_INCL_PATH)/*.h $(INFRA_PATH)/*.h $(PRCS_MNG_PATH)/*.h)
-SRCS := 	$(wildcard $(ROOT_PATH)/*.c $(INFRA_PATH)/*.c $(PRCS_MNG_PATH)/*.c)
-OBJS := 	$(SRCS:.c=.o)
-
-#LIBS :=
-#LPATH :=
-
-EXEC := 	$(EXEC_PATH)/exec
-
-.PHONY: all 
+EXECUTABLE 		:= $(EXEC_PATH)/exec
 
 # main target
-all: $(EXEC_PATH) $(EXEC)
+.PHONY: all
+all: $(EXEC_PATH) $(EXECUTABLE)
+	@echo __ALL__ $(EXEC_PATH) $(EXECUTABLE)
 
+# target: assures the folder for the exetuable exist
 $(EXEC_PATH):
-	@if [ ! -d ./$(EXEC_PATH) ]; then mkdir ./$(EXEC_PATH); fi;
+	@echo __EXEC_PATH__
+	@if [ ! -d $(EXEC_PATH) ]; then mkdir $(EXEC_PATH); fi;
 
-$(EXEC): $(OBJS) Makefile
-	$(CC_TOOL) $(OBJS) -o $(EXEC)
+# executable file target
+$(EXECUTABLE): $(MDL_LIBS) Makefile
+	@echo __EXECUTABLE__ $(MDL_LIBS)
+	$(CC_TOOL) -static $(MDL_LIBS) -o $(EXECUTABLE)
 
-# target: header files dependecny
-#.c.o: $(HDRS) Makefile
-%.o: %.c $(HDRS) Makefile 
-	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $< -o $@
+$(US_INFRA_LIB): $(wildcard $(US_INFRA_PATH)/*.h $(US_INFRA_PATH)/*.c $(MAIN_INCL)/*.h)
+	@echo __US_INFRA_LIB__
+	make -C $(US_INFRA_PATH) _DBG_=$(DBG) -f MakefileInfra
 
-#.SUFFIXES: .c .o
+$(PRCS_MNG_LIB): $(wildcard $(PRCS_MNG_PATH)/*.h $(PRCS_MNG_PATH)/*.c $(MAIN_INCL)/*.h)
+	@echo __PRCS_MNG_LIB__
+	make -C $(PRCS_MNG_PATH) _DBG_=$(DBG) -f MakefilePrcsMng
 
 .PHONY: clean 
 clean:
-	rm $(OBJS)
-	rm $(EXEC)
-
-
+	make clean -C $(US_INFRA) _DBG_=$(DBG) -f MakefileInfra
+	make clean -C $(PRCS_MNG) _DBG_=$(DBG) -f MakefilePrcsMng
+	@if [ -f $(EXECUTABLE) ]; then rm $(EXECUTABLE); fi;
 

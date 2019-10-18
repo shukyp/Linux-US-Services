@@ -1,3 +1,4 @@
+
 # Linux-US-OS-Services / Tech Info
 
 Linux-US-OS-Services stands for Linux User-Space services offered by the Linux kernel.
@@ -21,9 +22,10 @@ Calling exec -m #ID will make exec call the intended module.
 
 ## Makefile(s)
 
-The makefile is heirarcical. Each module is built using its own makefile.
+The makefilea are heirarcical.
 
-Root makefile calls each module's makefile.
+The root Makefile calls each module's makefile to create a library.
+As its final step, the root Makefile links all lbraries to create the executable.
 
 Please note that when a single header file is changed, all c files will be recompiled.
 The author decidec not to use teh GNI make capability to build depenedency lists for each c file

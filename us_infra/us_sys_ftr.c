@@ -28,6 +28,9 @@
 #include <unistd.h>
 #include <limits.h>
 #include <time.h>
+#include <string.h>
+
+#include <sys/utsname.h>
 
 #include "us_sys_ftr.h"
 
@@ -60,9 +63,33 @@ returns:
 void show_us_sys_features(void)
 {
 	int sys_val;
- 
-	printf("\n\n System Features (POSIX 1 based)\n");
+	struct utsname uname_buf;
 
+
+	// get / present all system run-time capabilities
+	sys_val = uname(&uname_buf);
+	if (sys_val != 0)
+	{
+		printf ("Call to uname failed - %s... ", strerror(errno));
+		exit (EXIT_FAILURE);
+	}
+	 
+	printf("\n\n System Run-Time Capabilities");
+	printf("\n ----------------------------------\n");	
+
+	printf ("\nOS name:\t- %s", uname_buf.sysname);
+	printf ("\nOS releae:\t- %s", uname_buf.release);
+	printf ("\nOS version:\t- %s", uname_buf.version);
+	printf ("\nOS machine:\t- %s", uname_buf.machine);
+	printf ("\nOS nodename:\t- %s", uname_buf.nodename);
+
+	printf ("\n\n                ****************\n\n");
+ 
+
+	// get / present System Features (POSIX 1 based) 
+	printf("\n\n System Features (POSIX 1 based)");
+	printf("\n ----------------------------------\n");
+	
 	// ARG_MAX - _SC_ARG_MAX
    //  maximum length of the arguments to the exec, Must not be less than _POSIX_ARG_MAX (4096).
 	sys_val = sysconf(_SC_ARG_MAX);
@@ -87,7 +114,7 @@ void show_us_sys_features(void)
    // The number of clock ticks per second.  The corresponding variable is obsolete.  It was of course called CLK_TCK.
    // (Note: the macro CLOCKS_PER_SEC does not give information: it must equal 1000000.)
 	sys_val = sysconf(_SC_CLK_TCK);
-	printf ("\n The number of clock ticks per second: %d (enforced be %d)", sys_val, CLOCKS_PER_SEC);
+	printf ("\n The number of clock ticks per second: %d (enforced be %d)", sys_val, (int)CLOCKS_PER_SEC);
 
    // NGROUPS_MAX - _SC_NGROUPS_MAX
    // Maximum number of supplementary group IDs.

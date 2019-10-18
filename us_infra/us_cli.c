@@ -37,6 +37,7 @@
 
 #include "us_cli.h"
 #include "us_modules.h"
+#include "us_sys_ftr.h"
 
 // extern objects
 extern char *optarg;	// argument value of the option	(in case of 'arg:' in cli_options string)

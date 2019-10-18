@@ -24,11 +24,8 @@
 
 // includes
 #include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
-#include <time.h>
 
-#include "us_sys_ftr.h"
+#include "prcs_mng.h"
 
 // extern objects
 

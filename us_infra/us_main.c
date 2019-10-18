@@ -29,6 +29,7 @@
 #include "us_types.h"
 
 #include "us_cli.h"
+#include "us_modules.h"
 
 // extern objects
 extern char *optarg;	// argument value of the option	(in case of 'arg:' in cli_options string)
@@ -87,7 +88,7 @@ int main (int argc, char* argv[])
 	// being here means there is at least one CLI option
 	
 	// Welcome message
-	printf ("\n\nWelcome to %s, %d CLI options are being parsed ... \n\n", program_name, argc-1);
+	printf ("\n\nWelcome to %s, %d CLI option(s) being parsed ... \n\n", program_name, argc-1);
 
 	// parse 
 	exit_code = cli_parse (argc, argv, &cli_args);

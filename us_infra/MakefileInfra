@@ -1,0 +1,66 @@
+#
+# How depedency rule components are referred
+#
+# all: a.cpp b.cpp
+# $@ mean to 'all' (the target)
+# $< a.cpp
+# $^ a.cpp b.cpp
+#
+# ------------------------
+#
+# debug make file 
+# make --debug[=flags]
+#	no flags is like using -d
+#	b basic debugging
+# 	v verbose basic debugging
+#	i show implicit rules
+#	j detailed debug info
+#	m show info while remaking makefile
+#
+# see: https://linux.die.net/man/1/make
+#
+#
+
+# Config Variables
+CC_FLAG 			:= -v -Wall $(_DBG_) -c 
+CC_TOOL 			:= gcc
+
+# US_INFRA (root) module
+MDL_NAME			:= us_infra
+MDL_PATH       := .
+MDL_INCL			:= $(MDL_PATH)
+MAIN_INCL		:= ../incl
+
+INCL_PATH  		:= -I$(MDL_INCL) -I$(MAIN_INCL)
+MDL_LIB			:= $(MDL_PATH)/$(MDL_NAME).a
+
+HDRS := 	$(wildcard $(MDL_INCL)/*.h $(MAIN_INCL)/*.h)
+SRCS := 	$(wildcard $(MDL_PATH)/*.c)
+OBJS := 	$(SRCS:.c=.o)
+
+THIS_MAKEFILE = MakefileInfra
+
+# main target
+.PHONY: all
+all: $(MDL_LIB)
+
+$(MDL_LIB): $(OBJS) $(THIS_MAKEFILE) 
+	@echo ___INFRA_EXEC___
+	ar cr -o $(MDL_LIB) $(OBJS)
+
+# object file target
+%.o: %.c $(HDRS) $(THIS_MAKEFILE)
+	@echo ___INFRA_C2OBJ___
+	$(CC_TOOL) $(CC_FLAG) $(INCL_PATH) $< -o $@	
+
+.PHONY: clean 
+clean:
+	@echo ___INFRA_CLN___
+	@if [ -f $(MDL_LIB) ]; then rm $(MDL_LIB); fi;
+	@for _file_ in $(OBJS); do \
+		if [ -f $$_file_ ]; then rm $$_file_; fi; \
+	done
+	
+
+
+
