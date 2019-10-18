@@ -10,9 +10,12 @@ The root module is located at the us_infra folder (where the main() function res
 Each module holds its own readme file, Makefile and source files (*.c, *.h) - all resides
 at a dedicated path.
 
-Assume module's name is xxxxx (e.g. prcs_mng) then each module:
-1. entry point is at a function called xxxxx_main()
-2. provides a header file named xxxxx.h and resides in root-foldr/incl.
+Assume module's name is xxxx (e.g. prcs_mng) then each module has:
+1. entry point file is at a function called xxxx_main()
+2. "internal" header file - xxxx_inner.h - that exposes definitions/API
+   internlly to module's logic.
+3. "external" header file - xxxx.h - located in root-folder/incl
+   that exposes definitions/API externally to other module's logic.
 
 The executable object named 'exec' resides at the root-folder/obj/ folder.
 The obj folder will be created automaticaly by the make file if absent.
