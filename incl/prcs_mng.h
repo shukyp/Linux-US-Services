@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------
  * prcs_mng.h
  * 
- * Header file that exports services of prcs_mng modile
+ * Header file that exports services of prcs_mng module
  *  
  *  
  * 

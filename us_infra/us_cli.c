@@ -35,9 +35,7 @@
 #include <stdio.h>
 #include <getopt.h>
 
-#include "us_cli.h"
-#include "us_modules.h"
-#include "us_sys_ftr.h"
+#include "us_infra_inner.h"
 
 // extern objects
 extern char *optarg;	// argument value of the option	(in case of 'arg:' in cli_options string)
@@ -63,7 +61,8 @@ static const char* const cli_options = "hslvm:"; 	// h:help,
 static const char* program_name;
 
 // protoypes
-static void show_usage(bool should_abort, int exit_code);
+static void show_usage(void);
+static void show_cli_args(int argc, char** argv);
 
 
 /*------------------------------------------------------------
@@ -79,7 +78,7 @@ description:
 input:
 	argc	- programs CLI options counter
 	argv	- programs CLI options string
-	cli_args - control structure to report CLI options
+	cli_args - control structure to report CLI options tp caller
 
 returns:
 	int - exit code
@@ -88,11 +87,21 @@ returns:
   ------------------------------------------------------------*/
 int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 {
-	int opt;
+	int 	opt;
+	bool	h_option;
+	bool	s_option;
+	bool	l_option;
 	
 	// init
 	opterr = 0;			// avoid getopt() printing errors by itself
 	optind = 1;			// point to argv[1], just to be on safe side
+
+	h_option = false;
+	s_option = false;
+	l_option = false;
+
+	// set the program name
+	program_name = argv[0];
 
 	// traverse the CLI options string
 	while ((opt = getopt(argc, argv, cli_options)) != -1)
@@ -100,15 +109,15 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 		switch (opt)
 		{
 			case 'h': /* help */
-				show_usage (true, EXIT_SUCCESS); // print help to stdout and exit with success
+				h_option = true;
 				break;
 
 			case 's': // list System features
-				show_us_sys_features();
+				s_option = true;	
 				break;
 
-			case 'l': // list available modules		
-				show_us_modules();
+			case 'l': // list available modules
+				l_option = true;		
 				break;
 							
 			case 'v': // verbose
@@ -121,7 +130,8 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 
 			case '?': // error: invalid option encountered
 				printf ("\n\nInvalid option encountered or missing argument for valid option \n\n");
-				show_usage (true, -EXIT_FAILURE); // print usage and exit
+				show_usage ();
+				exit (-EXIT_FAILURE);
 				break;
 				
 			case -1: // success: all CLI options successfully parsed
@@ -130,18 +140,31 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 
 			default: // Something unexpected.
 				printf ("\nUnexpected event, Quit\n");
-				show_usage (true, -EXIT_FAILURE);
+				show_usage ();
+				exit (-EXIT_FAILURE);
 				break;
 		}
 	}
 
-	// being here means that CLI options successfully processed w/o any error	
-	// if verbose requested, print all given optons 
+	// if help requested
+	if (h_option)
+		show_usage (); // print help to stdout and exit with success
+
+	// if list System features requested
+	if (s_option)
+		show_us_sys_features();
+
+	// if list available modules requested
+	if (l_option)
+		show_us_modules();
+
+	// if verbose requested 
 	if (cli_args->verbose) 
-	{
-		for (int i=1; i<argc; ++i)
-			printf ("Argument# %d: %s\n", i, argv[i]);
-	}
+		show_cli_args(argc, argv);
+
+	// should we quit
+	if (h_option || s_option || l_option)
+		exit(EXIT_SUCCESS);
 	
 	// advise caller
 	return (EXIT_SUCCESS);	
@@ -166,22 +189,44 @@ input:
 returns: 
 	None
   ------------------------------------------------------------*/
-static void show_usage (bool should_abort, int exit_code)
+static void show_usage (void)
 {
 	fprintf (stdout, "\n");
 	fprintf (stdout, "Usage: %s -m # [-l] [-h] [-v]\n", program_name);
 	fprintf (stdout,
-			" -h 	   - Display usage \n"
-			" -s     - System features \n"
-			" -v 	   - Enable Verbose \n"
-			" -l  	- Show User-Space modules list\n"
-			" -m # 	- Set User-Space module to be invoked\n"
+			" -h	- Display usage \n"
+			" -s	- System features \n"
+			" -v	- Enable Verbose \n"
+			" -l	- Show User-Space modules list\n"
+			" -m #	- Set User-Space module to be invoked\n"
 			);
 	fprintf (stdout, "\nComment: if -h or -l are requested the program displays the requested info and aborts\n\n");		
-			
-	// if program abort is required
-	if (should_abort)
-		exit (exit_code);
+}
+
+
+/*------------------------------------------------------------
+function: 
+	displays the actual CLI arguments  
+	
+description:	
+	displays the actual CLI arguments one at a line
+
+input:
+	argc	- programs CLI options counter
+	argv	- programs CLI options string
+
+returns: 
+	None
+  ------------------------------------------------------------*/
+static void	show_cli_args(int argc, char** argv)
+{
+	printf ("\n\n CLI arguments");
+	printf ("\n ---------------");
+	
+	for (int i=1; i<argc; ++i)
+		printf ("\n Argument# %d: %s", i, argv[i]);
+
+	printf ("\n\n");
 }
  
 	

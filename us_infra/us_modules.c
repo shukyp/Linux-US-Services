@@ -27,9 +27,9 @@
 // includes
 #include <stdio.h>
 
-#include "us_modules.h"
-
 #include "prcs_mng.h"
+
+#include "us_infra_inner.h"
 
 // extern objects
 
@@ -125,6 +125,7 @@ void show_us_modules (void)
 	
 	// print table title
 	printf ("\n Modules Table");
+	printf ("\n ---------------");
 	
 	// print modules list
 	for (UINT i=1; i<=num_of_modules; i++)
@@ -135,9 +136,6 @@ void show_us_modules (void)
 	
 	// print table title
 	printf ("\n\n");
-	
-	// unconditionally abort
-	exit (0);
 }
  
  

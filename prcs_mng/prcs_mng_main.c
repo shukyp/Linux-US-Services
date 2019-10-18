@@ -25,7 +25,7 @@
 // includes
 #include <stdio.h>
 
-#include "prcs_mng.h"
+#include "prcs_mng_inner.h"
 
 // extern objects
 

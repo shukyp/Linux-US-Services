@@ -24,32 +24,16 @@
  
 // includes
 #include <stdio.h>
-#include <getopt.h>
  
-#include "us_types.h"
-
-#include "us_cli.h"
-#include "us_modules.h"
+#include "us_infra_inner.h"
 
 // extern objects
-extern char *optarg;	// argument value of the option	(in case of 'arg:' in cli_options string)
-extern int optind; 		// the index of the next element to be processed in argv
-						// The system initializes this value to 1
-						// The caller can reset it to 1 to restart scanning of the same argv, 
-						// or when scanning a new argument vector.
-						// when the argv scan is done, optind is set to 0 (argv[0]=program name)
-
-extern int opterr;		// if set to 0 prevents getopt() from printin error messages
-extern int optopt;  	// if unknown option encountered, getopt() places it in optopt 
 
 // defines
 
 // types
  
 // local objects 
-static const char* const cli_options = "hvlm:"; // h:help, v:verbose, m:module+num
-static const char* program_name;
-int exit_code;
 
 // protoypes
 
@@ -67,7 +51,9 @@ returns:
   ------------------------------------------------------------*/  
 int main (int argc, char* argv[])
 {
-	int			rc;
+	int		rc;
+	int		exit_code;
+	char*		program_name;
 	CLI_ARGS	cli_args;
 	
 	// init

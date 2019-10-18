@@ -1,8 +1,8 @@
 /*---------------------------------------------------------------------------------
- * us_cli.h
+ * prcs_mng_inner.h
  * 
- * Header file that exports services of us_cli.c
- * 
+ * Header file that exports inside the US_INFRA module prcs_mng module
+ *  
  *  
  * 
  * Evolution table:
@@ -14,27 +14,25 @@
  * 
  *
  * 
- * 
  *** Author: Shuky Persky
  *
  * -----------------------------------------------------------------------------------*/
+ 
+#ifndef __PRCS_MNG_INNER_H__
 
-#ifndef __US_CLI_H__
-
-#define __US_CLI_H__
+#define __PRCS_MNG_INNER_H__
 
 // includes
-#include "us_types.h"
+#include "prcs_mng.h"
 
 // types
-typedef struct cli_args
-{
-	bool 	verbose;
-	UINT	mdl_num;
-} CLI_ARGS;
 
 // prototypes
-int cli_parse (int argc, char** argv, CLI_ARGS* cli_args);
+int prcs_manage_main(bool verbose);
 
 
-#endif // __US_CLI_H__
+
+#endif // __PRCS_MNG_INNER_H__
+
+
+

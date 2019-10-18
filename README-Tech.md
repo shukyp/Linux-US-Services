@@ -1,36 +1,35 @@
 
-# Linux-US-OS-Services / Tech Info
+# Linux-US-Services / Tech Info
 
 Linux-US-OS-Services stands for Linux User-Space services offered by the Linux kernel.
 
 The code is sperated to modules, each covers a different topic.
 
-Each module holds its own read me file and resides in a dedicated path.
+The root module is located at the us_infra folder (where the main() function resides).
 
-Assume modules name is xxxxx (e.g. prcs_mng) then:
-1. each module's entry point is at a function called xxxxx_main()
-2. each module provides a header file whose name is xxxxx.h
+Each module holds its own readme file, Makefile and source files (*.c, *.h) - all resides
+at a dedicated path.
 
-The executable object named 'exe' resides at obj/ folder (creaded by the make file).
-Calling make while in 'initial' folder. make will use the Makefile located in that folder.
+Assume module's name is xxxxx (e.g. prcs_mng) then each module:
+1. entry point is at a function called xxxxx_main()
+2. provides a header file named xxxxx.h and resides in root-foldr/incl.
 
-Calling the exec -h will tell about the supported CLI options.
-One of the supported CLI options is: -m # (where # is the numer of the module).
-calling exec -l will amke exec report the supported modules along with module name and its ID.
-Calling exec -m #ID will make exec call the intended module.
-
+The executable object named 'exec' resides at the root-folder/obj/ folder.
+The obj folder will be created automaticaly by the make file if absent.
 
 ## Makefile(s)
 
 The makefilea are heirarcical.
 
-The root Makefile calls each module's makefile to create a library.
+The root Makefile calls each module's makefile to create a library file (module.a).
 As its final step, the root Makefile links all lbraries to create the executable.
 
-Please note that when a single header file is changed, all c files will be recompiled.
-The author decidec not to use teh GNI make capability to build depenedency lists for each c file
-(using the gcc cpability to report #included files).
+# CLI options
 
+Calling the exec -h will tell the supported CLI options.
+
+Once the user gets familiar with the application, he/she will call exec -m #
+to invoke a selected module to enjoy what it has to offer.
 
 ## Deployment
 

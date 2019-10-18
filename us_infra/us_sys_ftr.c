@@ -32,7 +32,7 @@
 
 #include <sys/utsname.h>
 
-#include "us_sys_ftr.h"
+#include "us_infra_inner.h"
 
 // extern objects
 
@@ -169,8 +169,6 @@ void show_us_sys_features(void)
 	
 	printf ("\n\n Comment: Some values may be huge and are not suitable for allocating memory ");
 	printf ("\n\n                         ****************\n\n");
-
-	exit (EXIT_SUCCESS);
 
 }
 
