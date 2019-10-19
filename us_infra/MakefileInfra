@@ -32,7 +32,9 @@ MDL_INCL			:= $(MDL_PATH)
 MAIN_INCL		:= ../incl
 
 INCL_PATH  		:= -I$(MDL_INCL) -I$(MAIN_INCL)
-MDL_LIB			:= $(MDL_PATH)/$(MDL_NAME).a
+
+OUPUT_PATH		:= ../obj
+MDL_LIB			:= $(OUPUT_PATH)/lib_$(MDL_NAME).a
 
 HDRS := 	$(wildcard $(MDL_INCL)/*.h $(MAIN_INCL)/*.h)
 SRCS := 	$(wildcard $(MDL_PATH)/*.c)
