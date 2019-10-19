@@ -37,7 +37,7 @@ CC_TOOL 			:= gcc
 
 #common settings
 MAIN_INCL		:= ./incl
-EXEC_PATH  		:= ./obj
+EXEC_PATH  		:= ./bin
 LIB_PATH 		:= $(EXEC_PATH)
 
 EXECUTABLE 		:= $(EXEC_PATH)/exec

@@ -1,0 +1,32 @@
+
+Ideas for the project
+=======================
+
+Linux US facilities
+----------------------
+- Process management/IPC
+- Threads/ITC/Semaphores/Scheduling
+- File/Folders handling,
+- Shared memory
+- Mapping memory (mmap)
+- signals processing
+- job control
+- terminals
+- Networking/Sockets
+- Pipes
+
+Libraries
+-----------
+- Memory management (C, C++)
+- Logger (C++)
+- Sort algorithms (C++, Python)
+- File(s) Recursive resrch / Regex based (C++)
+
+Applications (C++)
+-------------------
+- Web based system
+	- Server side - Python, MySQL
+	- Client side - TBD
+- REST APIS
+- GeoLocation 
+

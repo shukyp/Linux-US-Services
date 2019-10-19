@@ -17,8 +17,8 @@ Assume module's name is xxxx (e.g. prcs_mng) then each module has:
 3. "external" header file - xxxx.h - located in root-folder/incl
    that exposes definitions/API externally to other module's logic.
 
-The executable object named 'exec' resides at the root-folder/obj/ folder.
-The obj folder will be created automaticaly by the make file if absent.
+The executable object named 'exec' resides at the root-folder/bin/ folder.
+The bin folder will be created automaticaly by the make file if absent.
 
 ## Makefile(s)
 

@@ -1,0 +1,29 @@
+
+The file holds tech info of misc. unrelated toppics:
+=====================================================
+
+
+
+============================================================================
+POSIX typed (supported by glibc)
+================================
+
+Type-Name		Meaning
+----------		-------------------------------------------
+dev_t				holds mjr/mnr values of a device
+uid_t, gid_t	user ID, Group ID
+pid_t				process ID
+id_t				generic type that can hold uid_t, gid_t, id_t
+off_t				signed integer, indicates offset in file
+size_t			unsigned integer. measures object's memory size
+ssize_t			signed integer, indicates size/position(+), error(-)
+
+time_t			integer gives time in seconds (since a point of time in past)
+
+
+============================================================================
+Static Libraries
+===================
+Assume 3 obj files: f1.o, f2.o, f3.o (created from f1.c, f2.c, f3.c)
+
+
