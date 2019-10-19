@@ -19,8 +19,8 @@ If any mistake/error is encountered, or any idea comes up , the author welcomes
 Same is true if there will be an uncovered topic which should appear as part 
 of the package.
 
-## Tech Info
-Please see README-Tech.md
+## More Tech Info
+Please refer to Doc folder's documents for more info.
 
 ## Contact point
 Please email to: shukyp@bezeqint.net
