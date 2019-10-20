@@ -81,7 +81,7 @@ int main (int argc, char* argv[])
 	if (exit_code != EXIT_SUCCESS)
 	{
 		printf ("\n\n An error took place while parsing the CLI options (try -h for help), Quit\n\n");
-		exit(-EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	// if a module number provided - call it

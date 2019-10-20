@@ -163,5 +163,5 @@ int call_module (UINT us_mdl_num, bool verbose)
 	}
 
 	// invalid us_module number
-	return (-EXIT_FAILURE);		
+	return (EXIT_FAILURE);		
 }

@@ -131,7 +131,7 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 			case '?': // error: invalid option encountered
 				printf ("\n\nInvalid option encountered or missing argument for valid option \n\n");
 				show_usage ();
-				exit (-EXIT_FAILURE);
+				exit (EXIT_FAILURE);
 				break;
 				
 			case -1: // success: all CLI options successfully parsed
@@ -141,7 +141,7 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 			default: // Something unexpected.
 				printf ("\nUnexpected event, Quit\n");
 				show_usage ();
-				exit (-EXIT_FAILURE);
+				exit (EXIT_FAILURE);
 				break;
 		}
 	}
