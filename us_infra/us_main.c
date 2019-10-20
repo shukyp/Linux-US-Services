@@ -28,6 +28,7 @@
 #include "us_infra_inner.h"
 
 // extern objects
+//extern char* environ[]; // POSIX defined - not supported by ubuntu
 
 // defines
 
@@ -36,6 +37,8 @@
 // local objects 
 
 // protoypes
+static void show_cli_args(int argc, char** argv);
+static void show_environ_vars(char* environ[]);
 
 
 /*------------------------------------------------------------
@@ -49,7 +52,7 @@ input:
 returns: 
 	int - exit code (report to OS based process manager)
   ------------------------------------------------------------*/  
-int main (int argc, char* argv[])
+int main (int argc, char* argv[], char* environ[])
 {
 	int		rc;
 	int		exit_code;
@@ -84,6 +87,13 @@ int main (int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	// if verbose mode - display CLI options and environment variables
+	if (cli_args.verbose)
+	{		
+		show_cli_args(argc, argv);
+		show_environ_vars (environ);
+	}
+
 	// if a module number provided - call it
 	if (cli_args.mdl_num > 0)
 	{
@@ -103,5 +113,81 @@ int main (int argc, char* argv[])
 
 	// Quit 
 	exit (EXIT_SUCCESS);
+}
+
+
+/*------------------------------------------------------------
+function: 
+	displays the actual CLI arguments  
+	
+description:	
+	displays the actual CLI arguments one at a line
+
+input:
+	argc	- programs CLI options counter
+	argv	- programs CLI options array of string pointers
+
+returns: 
+	None
+  ------------------------------------------------------------*/
+static void	show_cli_args(int argc, char** argv)
+{
+	printf ("\n\n CLI arguments");
+	printf ("\n ---------------");
+	
+	for (int i=1; i<argc; ++i)
+		printf ("\n Argument# %d: %s", i, argv[i]);
+
+	printf ("\n\n");
+}
+
+
+/*------------------------------------------------------------
+function: 
+	displays the actual environment variables  
+	
+description:	
+	ddisplays the actual environment variables one at a line
+
+input:
+	environ	- programs environment variables array of string pointers
+
+returns: 
+	None
+  ------------------------------------------------------------*/
+static void show_environ_vars(char* environ[])
+{
+	char* var_val;
+	char* orgnl_val;
+	int	env_len;
+	
+	printf ("\n\n Environment Variables");
+	printf ("\n -------------------------");
+
+	// traverse thru all environment variables
+	for (env_len=0; (environ[env_len] != NULL); env_len++);
+
+	// show length of environment and each entry's NAME=VALUE
+	printf("\n The number of environment variables: %d\n", env_len);
+
+	for (int i=0; i<env_len; i++)
+		printf("\n [%02d] %s", i+1, environ[i]);
+	
+	printf ("\n\n");
+	
+	// Fetch content of specifc env. variables
+	printf("\n Fetching Values of 'USER' and 'HOME' variabled");
+	printf("\n USER: %s", (((var_val = getenv("USER")) != (char*)NULL)? var_val : "N/A"));
+	printf("\n HOME: %s", (((var_val = getenv("HOME")) != (char*)NULL)? var_val : "N/A"));
+
+	// overwrite values of an existing variable and display
+	orgnl_val = getenv("USER"); // keep original value aside
+	printf("\n\n\n Set 'User' to to different value and then fetch and display it");
+	putenv("USER=Trump"); // POSIX defined. overrides if variable exists
+	printf("\n USER: %s (changed)", (((var_val = getenv("USER")) != (char*)NULL)? var_val : "N/A"));
+	setenv("USER", orgnl_val, 1); // 1-means overwrite if exist
+	printf("\n USER: %s (recovered)", (((var_val = getenv("USER")) != (char*)NULL)? var_val : "N/A"));
+
+	printf ("\n\n");
 }
 

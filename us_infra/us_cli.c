@@ -62,7 +62,6 @@ static const char* program_name;
 
 // protoypes
 static void show_usage(void);
-static void show_cli_args(int argc, char** argv);
 
 
 /*------------------------------------------------------------
@@ -158,10 +157,6 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 	if (l_option)
 		show_us_modules();
 
-	// if verbose requested 
-	if (cli_args->verbose) 
-		show_cli_args(argc, argv);
-
 	// should we quit
 	if (h_option || s_option || l_option)
 		exit(EXIT_SUCCESS);
@@ -204,29 +199,5 @@ static void show_usage (void)
 }
 
 
-/*------------------------------------------------------------
-function: 
-	displays the actual CLI arguments  
-	
-description:	
-	displays the actual CLI arguments one at a line
-
-input:
-	argc	- programs CLI options counter
-	argv	- programs CLI options string
-
-returns: 
-	None
-  ------------------------------------------------------------*/
-static void	show_cli_args(int argc, char** argv)
-{
-	printf ("\n\n CLI arguments");
-	printf ("\n ---------------");
-	
-	for (int i=1; i<argc; ++i)
-		printf ("\n Argument# %d: %s", i, argv[i]);
-
-	printf ("\n\n");
-}
  
 	
