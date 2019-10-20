@@ -74,8 +74,8 @@ void show_us_sys_features(void)
 		exit (EXIT_FAILURE);
 	}
 	 
-	printf("\n\n System Run-Time Capabilities");
-	printf("\n ----------------------------------\n");	
+	printf("\n\n Basic System Information");
+	printf("\n ---------------------------\n");	
 
 	printf ("\nOS name:\t- %s", uname_buf.sysname);
 	printf ("\nOS releae:\t- %s", uname_buf.release);

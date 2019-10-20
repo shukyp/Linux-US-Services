@@ -1,9 +1,9 @@
 
 # Linux-US-Services / Tech Info
-
+-----------------------------------
 Linux-US-OS-Services stands for Linux User-Space services offered by the Linux kernel.
 
-The code is sperated to modules, each covers a different topic.
+The code is divided into modules, each covers a different topic.
 
 The root module is located at the us_infra folder (where the main() function resides).
 
@@ -21,21 +21,25 @@ The executable object named 'exec' resides at the root-folder/bin/ folder.
 The bin folder will be created automaticaly by the make file if absent.
 
 ## Makefile(s)
-
+-----------------
 The makefilea are heirarcical.
 
 The root Makefile calls each module's makefile to create a library file (module.a).
 As its final step, the root Makefile links all lbraries to create the executable.
 
-# CLI options
-
+## CLI options
+----------------
 Calling the exec -h will tell the supported CLI options.
 
 Once the user gets familiar with the application, he/she will call exec -m #
 to invoke a selected module to enjoy what it has to offer.
 
-## Deployment
+## Development Environment
+-------------------------
+Ubuntu 16.04 LTS
 
+## Deployment
+----------------
 The repository can be forked or cloned according to the
 interest of the one who has interest in the code.
 
@@ -43,5 +47,6 @@ Please refer to README and LICENSE files.
 
 
 ## Available modules
-
-1. Process Management (Create, Manage, Destroy)
+----------------------
+run: exec -l
+doc: each module comes along with redame file

@@ -5,7 +5,7 @@ This repository holds code that was developed by Shuky Persky for the purpose of
 studying and practicing Linux User-Space services given by the Linux Kernel.
 
 ## Usage / Sharing
-This code can be used and distributed freely for any matter is may help.
+This code can be used and distributed freely for any matter it may help.
 No warranty is set for users of this code.
 
 ## NO Warranty
