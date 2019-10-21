@@ -65,10 +65,9 @@ static void show_usage(void);
 
 
 /*------------------------------------------------------------
-function: 
-	parses the CLI arguments string 
+description:
+	parses the CLI arguments string
 	
-description:	
 	if -h (help) is encountered, the function handles the request and aborts
 	if -l (modules list) is encountered, the function handles the request and aborts
 	in any other case (see return values below) the function reports its caller 
@@ -167,10 +166,9 @@ int cli_parse (int argc, char** argv, CLI_ARGS* cli_args)
 
 
 /*------------------------------------------------------------
-function: 
-	displays the right call to this program 
-	
-description:	
+description:
+   displays the right call to this program
+   
 	prints a message which indicates how to call this program with 
 	reference to the various CLI options 
 	

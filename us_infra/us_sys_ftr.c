@@ -47,10 +47,9 @@
 
 
 /*------------------------------------------------------------
-function: 
-	shows the system features 
+description:
+	shows the system features
 	
-description:	
 	calls the appropriate system APIs to get info abot system features.
 	then the info is presented in a readable manner.
 
@@ -62,12 +61,12 @@ returns:
   ------------------------------------------------------------*/
 void show_us_sys_features(void)
 {
-	int sys_val;
-	struct utsname uname_buf;
+	int 				sys_val;
+	struct utsname sys_info;
 
 
 	// get / present all system run-time capabilities
-	sys_val = uname(&uname_buf);
+	sys_val = uname(&sys_info);
 	if (sys_val != 0)
 	{
 		printf ("Call to uname failed - %s... ", strerror(errno));
@@ -77,11 +76,11 @@ void show_us_sys_features(void)
 	printf("\n\n Basic System Information");
 	printf("\n ---------------------------\n");	
 
-	printf ("\nOS name:\t- %s", uname_buf.sysname);
-	printf ("\nOS releae:\t- %s", uname_buf.release);
-	printf ("\nOS version:\t- %s", uname_buf.version);
-	printf ("\nOS machine:\t- %s", uname_buf.machine);
-	printf ("\nOS nodename:\t- %s", uname_buf.nodename);
+	printf ("\nOS name:\t- %s", sys_info.sysname);
+	printf ("\nOS releae:\t- %s", sys_info.release);
+	printf ("\nOS version:\t- %s", sys_info.version);
+	printf ("\nOS machine:\t- %s", sys_info.machine);
+	printf ("\nOS nodename:\t- %s", sys_info.nodename);
 
 	printf ("\n\n                ****************\n\n");
  

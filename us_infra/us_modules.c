@@ -61,7 +61,7 @@ static UINT num_of_modules = (sizeof(us_mdls)/sizeof(US_MDL_INFO));
 
 
 /*------------------------------------------------------------
-function: 
+description: 
 	returns the number of supported modules 
 	
 input:	
@@ -77,7 +77,7 @@ returns:
  
  
 /*------------------------------------------------------------
-function: 
+description: 
 	returns specifc us_module description if input module number
 	is valid. otherwise, NULL is returned.
 	
@@ -99,18 +99,11 @@ const char* const get_us_module_topics(UINT us_mdl_num)
 
 
 /*------------------------------------------------------------
-function: 
-	displays the right call to this program 
-	
-description:	
-	prints a message which indicates how to call this program with 
-	reference to the various CLI options 
-	
-	if the reason for calling this function is due to the
-	user's request for help then the functions aborts the program.
+description:
+	displays the modules supported by the program
 
 input:
-	should_abort - should the function abort the program
+	None
 
 returns: 
 	None
@@ -140,7 +133,7 @@ void show_us_modules (void)
  
  
 /*------------------------------------------------------------
-function: 
+description: 
 	returns specifc us_module description if input module number
 	is valid. otherwise, NULL is returned.
 	

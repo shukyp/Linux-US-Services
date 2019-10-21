@@ -42,7 +42,7 @@ static void show_environ_vars(char* environ[]);
 
 
 /*------------------------------------------------------------
-function: 
+description: 
 	Main program entry point 
 	
 input:	
@@ -117,10 +117,7 @@ int main (int argc, char* argv[], char* environ[])
 
 
 /*------------------------------------------------------------
-function: 
-	displays the actual CLI arguments  
-	
-description:	
+description:
 	displays the actual CLI arguments one at a line
 
 input:
@@ -143,9 +140,6 @@ static void	show_cli_args(int argc, char** argv)
 
 
 /*------------------------------------------------------------
-function: 
-	displays the actual environment variables  
-	
 description:	
 	ddisplays the actual environment variables one at a line
 
