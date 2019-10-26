@@ -52,7 +52,17 @@ PRCS_MNG			:= prcs_mng
 PRCS_MNG_PATH	:= ./$(PRCS_MNG)
 PRCS_MNG_LIB	:= $(LIB_PATH)/lib_$(PRCS_MNG).a
 
-MDL_LIBS			:= $(US_INFRA_LIB) $(PRCS_MNG_LIB)
+#PRCS_SCHED module
+PRCS_SCHED		:= prcs_sched
+PRCS_SCHED_PATH:= ./$(PRCS_SCHED)
+PRCS_SCHED_LIB	:= $(LIB_PATH)/lib_$(PRCS_SCHED).a
+
+#PRCS_IPCITC module
+PRCS_IPCITC		:= prcs_ipcitc
+PRCS_IPCITC_PATH:= ./$(PRCS_IPCITC)
+PRCS_IPCITC_LIB	:= $(LIB_PATH)/lib_$(PRCS_IPCITC).a
+
+MDL_LIBS			:= $(US_INFRA_LIB) $(PRCS_MNG_LIB) $(PRCS_SCHED_LIB) $(PRCS_IPCITC_LIB)
 
 # main target
 .PHONY: all
@@ -77,9 +87,19 @@ $(PRCS_MNG_LIB): $(wildcard $(PRCS_MNG_PATH)/*.h $(PRCS_MNG_PATH)/*.c $(MAIN_INC
 	@echo __PRCS_MNG_LIB__
 	make -C $(PRCS_MNG_PATH) _DBG_=$(DBG) -f MakefilePrcsMng
 
+$(PRCS_SCHED_LIB): $(wildcard $(PRCS_SCHED_PATH)/*.h $(PRCS_SCHED_PATH)/*.c $(MAIN_INCL)/*.h)
+	@echo __PRCS_SCHED_LIB__
+	make -C $(PRCS_SCHED_PATH) _DBG_=$(DBG) -f MakefilePrcsSched	
+
+$(PRCS_IPCITC_LIB): $(wildcard $(PRCS_IPCITC_PATH)/*.h $(PRCS_IPCITC_PATH)/*.c $(MAIN_INCL)/*.h)
+	@echo __PRCS_IPCITC_LIB__
+	make -C $(PRCS_IPCITC_PATH) _DBG_=$(DBG) -f MakefilePrcsIpcItc
+	
 .PHONY: clean 
 clean:
 	make clean -C $(US_INFRA) _DBG_=$(DBG) -f MakefileInfra
 	make clean -C $(PRCS_MNG) _DBG_=$(DBG) -f MakefilePrcsMng
+	make clean -C $(PRCS_SCHED) _DBG_=$(DBG) -f MakefilePrcsSched
+	make clean -C $(PRCS_IPCITC) _DBG_=$(DBG) -f MakefileIpcItc
 	@if [ -f $(EXECUTABLE) ]; then rm $(EXECUTABLE); fi;
 

@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------------------------
  * prcs_mng_inner.h
  * 
- * Header file that exports inside the US_INFRA module prcs_mng module
+ * Header file that exports inside the PRCS_MNG module
  *  
  *  
  * 

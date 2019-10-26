@@ -28,6 +28,8 @@
 #include <stdio.h>
 
 #include "prcs_mng.h"
+#include "prcs_sched.h"
+#include "prcs_ipcitc.h"
 
 #include "us_infra_inner.h"
 
@@ -48,9 +50,10 @@ typedef struct us_mdl_info
 // local objects 
 static US_MDL_INFO const us_mdls[] = 
 	{
-		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(bool))prcs_mng_menu}, 
-		{"Inter Process Communication", 						(int (*)(bool))NULL}, 
-		{"Inter Thread Communication", 						(int (*)(bool))NULL}
+		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(bool))prcs_mng_menu},
+		{"Processes Scheduling & Priorities", 				(int (*)(bool))prcs_sched_menu}, 		
+		{"Inter Process/Thread Communication", 			(int (*)(bool))prcs_ipcitc_menu}, 
+		{"Files IO", 												(int (*)(bool))NULL}
 	};
 
 static UINT num_of_modules = (sizeof(us_mdls)/sizeof(US_MDL_INFO));	

@@ -25,7 +25,7 @@
 CC_FLAG 			:= -v -Wall $(_DBG_) -c 
 CC_TOOL 			:= gcc
 
-# US_INFRA (root) module
+# PRCS_MNG module params
 MDL_NAME			:= prcs_mng
 MDL_PATH       := .
 MDL_INCL			:= $(MDL_PATH)

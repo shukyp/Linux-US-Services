@@ -6,7 +6,7 @@
  * At user request, it either calls the requested facility or exits
  *  
  * Header file(s):
- * 	- prcs_us.h
+ * 	- prcs_mng.h
  * 	- prcs_mng_inner.h
  *
  * 
@@ -125,13 +125,7 @@ int prcs_mng_menu (bool verbose)
 				printf("\n NOT IMPLEMENTED YET ...");
 				enter_to_cont();			
 				show_menu();		
-				break;
-
-			case 8: // Process Scheduling/Prioritization
-				printf("\n NOT IMPLEMENTED YET ...");
-				enter_to_cont();			
-				show_menu();		
-				break;								
+				break;				
 				 
 			default:
 				 printf("\a"); // bell sound
@@ -164,7 +158,6 @@ static void show_menu(void)
 	printf("\n\n\t\t		5. Create a single child process (using vfork) and Watch its kill termination (-) ");
 	printf("\n\n\t\t		6. Create few children processes (using vfork) and Watch their termination (-)");
 	printf("\n\n\t\t		7. Parent and child have separate address space (-)");	
-	printf("\n\n\t\t		8. Process Scheduling/Prioritization (-)");
 	printf("\n\n\t\t		0. Exit");
 
 	printf("\n\n\t\t		Please Select : ");
