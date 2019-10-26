@@ -158,7 +158,7 @@ static void show_environ_vars(char* environ[])
 	printf ("\n\n Environment Variables");
 	printf ("\n -------------------------");
 
-	// traverse thru all environment variables
+	// count the number of environment variables
 	for (env_len=0; (environ[env_len] != NULL); env_len++);
 
 	// show length of environment and each entry's NAME=VALUE

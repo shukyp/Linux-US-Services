@@ -28,7 +28,7 @@
 // types
 
 // prototypes
-int prcs_manage_main(bool verbose);
+int prcs_mng_menu(bool verbose);
 
 
 

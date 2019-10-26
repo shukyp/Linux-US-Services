@@ -31,7 +31,7 @@
 
 
 // types
-typedef unsigned int		UINT;
+typedef unsigned int			UINT;
 typedef unsigned long int	ULINT;
 
 

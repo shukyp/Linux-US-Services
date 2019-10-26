@@ -28,8 +28,15 @@
 // types
 
 // prototypes
-int prcs_manage_main(bool verbose);
 
+// prcs_info.c
+void display_process_info(void);
+
+// prcs_rsrc.c
+void display_process_resource_usage_and_limits(void);
+
+// prcs_create_single_child_using_fork.c
+void prcs_create_single_child_using_fork (void);
 
 
 #endif // __PRCS_MNG_INNER_H__

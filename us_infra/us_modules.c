@@ -48,7 +48,7 @@ typedef struct us_mdl_info
 // local objects 
 static US_MDL_INFO const us_mdls[] = 
 	{
-		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(bool))prcs_manage_main}, 
+		{"Processes Manage (Create, Manage, Destroy)", 	(int (*)(bool))prcs_mng_menu}, 
 		{"Inter Process Communication", 						(int (*)(bool))NULL}, 
 		{"Inter Thread Communication", 						(int (*)(bool))NULL}
 	};
